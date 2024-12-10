@@ -31,7 +31,7 @@ def test_accuracy(model, dataloader):
 
         predict_batch = logits_batch.argmax(dim=1)
         n_corrects += (label_batch == predict_batch).sum().item()
-    
+
     accuracy = n_corrects / len(dataloader.dataset)
     return accuracy
 
@@ -60,11 +60,9 @@ def test(model, dataloader, loss_fn):
     for image_batch, label_batch in dataloader:
         with torch.no_grad():
             logits_batch = model(image_batch)
-        
+
         loss = loss_fn(logits_batch, label_batch)
         loss_total += loss.item()
-    
+
     # バッチ数で割って、平均値を返す
     return loss_total / len(dataloader)
-
-
